@@ -1,0 +1,6 @@
+[package]
+name = "methods"
+version = "0.1.0"
+authors = ["Henrique Nascimento Gouveia <h.gouveia@icloud.com>"]
+
+[dependencies]
