@@ -3,6 +3,7 @@ extern crate ncurses;
 
 use rand::Rng;
 use ncurses::*;
+use std::io;
 
 #[allow(dead_code)]
 
@@ -85,6 +86,7 @@ fn main() {
         refresh();
         getch();
         clear();
+        do_battle(&hero);
     }
 }
 
@@ -106,12 +108,59 @@ fn print_hero_status(hero: &Hero) {
     refresh();
 }
 
+fn do_battle(hero: &Hero) -> i32 {
+    let mut monster_name = String::new();
+    let mut monster_hability = String::new();
+    let mut monster_energy = String::new();
+    let mut again = 1;
+    let mut monster_stats: (i32, i32) = (0, 0);
 
+    printw("Monster's name: ");
+    refresh();
+    echo();
 
+    getstr(&mut monster_name);
 
+    while again == 1 {
+        clear();
+        printw("Monster's hability: ");
+        refresh();
+        getstr(&mut monster_hability);
 
+        let monster_hability: i32 = match monster_hability.trim().parse() {
+            Ok(monster_hability) => monster_hability,
+            Err(_) => continue,
+        };
 
+        if monster_hability <= 0 {
+            again = 1;
+        } else {
+            again = 0;
+        }
+        monster_stats.0 = monster_hability;
+    }
 
+    again = 1;
 
+    while again == 1 {
+        clear();
+        printw("Monster's energy: ");
+        refresh();
+        getstr(&mut monster_energy);
 
+        let monster_energy: i32 = match monster_energy.trim().parse() {
+            Ok(monster_energy) => monster_energy,
+            Err(_) => continue,
+        };
 
+        if monster_energy <= 0 {
+            again = 1;
+        } else {
+            again = 0;
+        }
+        monster_stats.1 = monster_energy;
+    }
+
+    let mut monster = Monster::new(monster_name, monster_stats.0, monster_stats.1);
+    1
+}
