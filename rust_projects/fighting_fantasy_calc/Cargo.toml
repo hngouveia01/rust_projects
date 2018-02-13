@@ -1,0 +1,7 @@
+[package]
+name = "fighting_fantasy_calc"
+version = "0.1.0"
+authors = ["Henrique Nascimento Gouveia <h.gouveia@icloud.com>"]
+
+[dependencies]
+rand = "0.4"
