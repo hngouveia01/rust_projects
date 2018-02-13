@@ -1,1 +1,0 @@
-/Users/henriquenascimentogouveia/repo/rust_projects/rust_projects/fighting_fantasy_calc/target/debug/fighting_fantasy_calc.dSYM: /Users/henriquenascimentogouveia/repo/rust_projects/rust_projects/fighting_fantasy_calc/src/main.rs
