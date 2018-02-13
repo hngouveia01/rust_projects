@@ -1,5 +1,8 @@
 extern crate rand;
+extern crate ncurses;
+
 use rand::Rng;
+use ncurses::*;
 
 #[allow(dead_code)]
 
@@ -36,14 +39,53 @@ impl Hero {
                              hability: hability,
                              energy: energy,
                              luck: luck
-            }
+                         }
 
+        }
+    }
+}
+
+struct Monster {
+    name: String,
+    initial_stat: MonsterStat,
+    actual_stat: MonsterStat,
+}
+
+impl Monster {
+    fn new(name: String, hability: i32, energy: i32) -> Monster {
+        Monster {
+            name: name,
+            initial_stat: MonsterStat {
+                              hability: hability,
+                              energy: energy
+                          },
+            actual_stat: MonsterStat {
+                             hability: hability,
+                             energy: energy
+                         }
         }
     }
 }
 
 fn main() {
     let mut hero = Hero::new();
+    let mut again = 1;
+
+    initscr();
+
+    printw("Your hero initial status:\n");
+    refresh();
+
+    printw("-----------------------------------------------\n");
+    print_hero_status(&hero);
+    printw("-----------------------------------------------\n\n");
+
+    while again == 1 {
+        printw("Press any key to start a battle!\n");
+        refresh();
+        getch();
+        clear();
+    }
 }
 
 fn run_one_dice_d6() -> i32 {
@@ -56,3 +98,20 @@ fn run_two_dices_d6() -> i32 {
 
     d1 + d2
 }
+
+fn print_hero_status(hero: &Hero) {
+    printw(format!("Initial Hability: {}\n", hero.initial_stat.hability).as_ref());
+    printw(format!("Initial Energy: {}\n", hero.initial_stat.energy).as_ref());
+    printw(format!("Initial Luck: {}\n", hero.initial_stat.luck).as_ref());
+    refresh();
+}
+
+
+
+
+
+
+
+
+
+
