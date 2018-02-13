@@ -122,43 +122,45 @@ fn do_battle(hero: &Hero) -> i32 {
     getstr(&mut monster_name);
 
     while again == 1 {
+        monster_hability.clear();
         clear();
         printw("Monster's hability: ");
         refresh();
         getstr(&mut monster_hability);
 
-        let monster_hability: i32 = match monster_hability.trim().parse() {
-            Ok(monster_hability) => monster_hability,
+        let hability: i32 = match monster_hability.trim().parse() {
+            Ok(hability) => hability,
             Err(_) => continue,
         };
 
-        if monster_hability <= 0 {
+        if hability <= 0 {
             again = 1;
         } else {
             again = 0;
         }
-        monster_stats.0 = monster_hability;
+        monster_stats.0 = hability;
     }
 
     again = 1;
 
     while again == 1 {
+        monster_energy.clear();
         clear();
         printw("Monster's energy: ");
         refresh();
         getstr(&mut monster_energy);
 
-        let monster_energy: i32 = match monster_energy.trim().parse() {
-            Ok(monster_energy) => monster_energy,
+        let energy: i32 = match monster_energy.trim().parse() {
+            Ok(energy) => energy,
             Err(_) => continue,
         };
 
-        if monster_energy <= 0 {
+        if energy <= 0 {
             again = 1;
         } else {
             again = 0;
         }
-        monster_stats.1 = monster_energy;
+        monster_stats.1 = energy;
     }
 
     let mut monster = Monster::new(monster_name, monster_stats.0, monster_stats.1);
